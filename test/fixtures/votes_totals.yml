@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  school_id: 
+  political_party_id: 
+  public_office_id: 
+  votes: MyString
+
+two:
+  school_id: 
+  political_party_id: 
+  public_office_id: 
+  votes: MyString

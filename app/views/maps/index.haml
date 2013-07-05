@@ -1,0 +1,12 @@
+
+
+%h2
+  seleccionar partido y cargo
+
+= label_tag :partido
+= select 'partido', 'political_party_id',  PoliticalParty.all.collect {|p| [ p.name.humanize, p.id ] }, {include_blank: 'None'}
+= label_tag :cargo
+= select 'cargo', 'public_office_id',  PublicOffice.all.collect {|p| [ p.name.humanize, p.id ] }, {include_blank: 'None'}
+= button_tag "mostrar", {id:"update_map"}
+#map3d
+
