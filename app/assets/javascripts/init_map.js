@@ -55,7 +55,7 @@ $(document).ready(function(){
   $('#update_map').on('click', function(){
     partido = $('#partido_political_party_id').val();
     cargo = $('#cargo_public_office_id').val();
-    kml = 'http://192.168.0.3:3000/kml/'+cargo+"/"+partido
+    kml = window.location.origin + '/kml/'+cargo+"/"+partido
     console.log(kml);
     loadKML(kml);
   })

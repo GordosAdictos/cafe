@@ -7,7 +7,7 @@ gem 'rails', '4.0.0.rc1'
 gem 'sqlite3'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0.rc1'
+#gem 'sass-rails', '~> 4.0.0.rc1'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -38,8 +38,13 @@ group :development do
 end
 gem 'haml'
 gem 'nokogiri'
-gem 'select2-rails'
+gem "therubyracer"
+gem "less-rails"
 gem 'twitter-bootstrap-rails'
+gem 'simple_form'
+
+gem 'rubyvor'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
