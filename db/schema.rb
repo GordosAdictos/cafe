@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20130704140537) do
     t.integer  "school_id"
     t.integer  "political_party_id"
     t.integer  "public_office_id"
-    t.integer  "votes",              limit: 255
+    t.integer  "votes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "votes_totals", ["political_party_id"], name: "index_votes_totals_on_political_party_id"
-  add_index "votes_totals", ["public_office_id"], name: "index_votes_totals_on_public_office_id"
-  add_index "votes_totals", ["school_id"], name: "index_votes_totals_on_school_id"
+  add_index "votes_totals", ["political_party_id"], name: "index_votes_totals_on_political_party_id", using: :btree
+  add_index "votes_totals", ["public_office_id"], name: "index_votes_totals_on_public_office_id", using: :btree
+  add_index "votes_totals", ["school_id"], name: "index_votes_totals_on_school_id", using: :btree
 
 end
