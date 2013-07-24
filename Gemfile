@@ -36,7 +36,7 @@ end
 # group :development do
 #   gem 'pry'
 
-end
+#end
 gem 'haml'
 # gem 'nokogiri'
 gem "therubyracer"
