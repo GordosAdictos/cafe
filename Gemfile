@@ -46,7 +46,7 @@ gem 'simple_form'
 
 #gem 'rubyvor'
 
-gem "seed_dump", "~> 0.5.3"
+#gem "seed_dump", "~> 0.5.3"
 gem 'protected_attributes'
 
 # Use ActiveModel has_secure_password

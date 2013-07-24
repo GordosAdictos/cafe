@@ -97,7 +97,6 @@ GEM
     sdoc (0.3.20)
       json (>= 1.1.3)
       rdoc (~> 3.10)
-    seed_dump (0.5.3)
     simple_form (1.4.1)
     slop (3.4.5)
     sprockets (2.10.0)
@@ -146,7 +145,6 @@ DEPENDENCIES
   pry
   rails (= 4.0.0.rc1)
   sdoc
-  seed_dump (~> 0.5.3)
   simple_form
   therubyracer
   turbolinks
