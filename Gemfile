@@ -33,12 +33,12 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development do
-  gem 'pry'
+# group :development do
+#   gem 'pry'
 
 end
 gem 'haml'
-gem 'nokogiri'
+# gem 'nokogiri'
 gem "therubyracer"
 gem "less-rails"
 gem 'twitter-bootstrap-rails'
@@ -60,3 +60,6 @@ gem 'protected_attributes'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# 181.5 + 145 + 10m
+# 115 6m
