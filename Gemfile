@@ -6,8 +6,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0.rc1'
 
 # Use sqlite3 as the database for Active Record
-#gem 'sqlite3'
-gem 'pg'
+gem 'sqlite3'
 
 # Use SCSS for stylesheets
 #gem 'sass-rails', '~> 4.0.0.rc1'
@@ -46,10 +45,7 @@ gem "less-rails"
 gem 'twitter-bootstrap-rails'
 gem 'simple_form'
 
-#gem 'rubyvor'
-
-gem "seed_dump", "~> 0.5.3"
-gem 'protected_attributes'
+gem 'rubyvor'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
