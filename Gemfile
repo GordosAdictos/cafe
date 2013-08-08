@@ -34,10 +34,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# group :development do
-#   gem 'pry'
+group :development do
+   gem 'pry'
+end
 
-#end
 gem 'haml'
 # gem 'nokogiri'
 gem "therubyracer"
