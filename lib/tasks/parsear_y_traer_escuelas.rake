@@ -537,6 +537,41 @@ end
 
   resul = Marshal.load File.read('Resultados.txt')
   r = "para ver"
+  cant = resul.count
+  extendido = * (0..cant)
+  ext = *(0..16)
+  para_borrar = []
+
+  extendido.each_with_index do |esc, ind|
+    
+    revisar = *(ind+1 ..cant-1)
+    revisar.each do |sospech|
+      if resul[esc][0][0] == resul[sospech][0][0] || resul[esc][0][1] == resul[sospech][0][1] 
+        unless resul[sospech].count == 0 || resul[esc].count == 0
+          p sospech
+          p ind
+          p "----------------"
+          p resul[esc][0][0]
+          p resul[sospech][0][0]
+          p resul[esc][0][1]
+          p resul[sospech][0][1]
+          p "----------------"
+          p resul[esc][1]
+          ext.each_with_index do |nro , ind|
+            resul[esc][1][ind] += resul[sospech][1][ind]
+          end
+          p resul[esc][1]
+          p resul[esc][0][2] << "-"<< resul[sospech][0][2]
+          p resul[esc] [0][3] << "-" << resul[sospech][0][3]
+          para_borrar.push sospech
+        end
+      end
+    end
+  end
+  para_borrar.each do |borr|
+    resul.delete_at(borr)
+  end
+
   binding.pry
   resul.each do  |re|
     a = School.new
@@ -548,12 +583,7 @@ end
     a.address = re[0][1]
     #a.group = r[0][2] + "..." + re[0][3]
 #inding.pry
-p a.name
+    p a.name
     a.save!
-
-
-    
-
-
   end
 end
