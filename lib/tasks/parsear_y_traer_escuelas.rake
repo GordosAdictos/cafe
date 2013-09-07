@@ -6,6 +6,11 @@ require 'nokogiri'
 require 'open-uri'
 require "rails"
 
+class Hash
+  def deep_dup
+    Marshal.load(Marshal.dump(self))
+  end
+end
 
 
 task :traerEscue2 => :environment do
@@ -129,7 +134,11 @@ task :traerEscue2 => :environment do
 
   end
 
-  binding.pry
+  serialized_array = Marshal.dump(escueNue)
+
+  File.open('escuelas_nuevas_con_coord.txt', 'wb') {|f| f.write(serialized_array) }
+
+  
 
 end
 
@@ -223,7 +232,8 @@ task :parsearDiputados => :environment do
 
   vinculosRosario = ["http://www.resultados.gob.ar/paginas/paginaspdf/ICIR21013.htm" , "http://www.resultados.gob.ar/paginas/paginaspdf/ICIR21014.htm"]
 
-   arrTodo = []
+  arrTodo = []
+
   vinculosRosario.each do |vin|
     
 
@@ -365,29 +375,185 @@ end
 # end
 
 
-#  task :sumarEscuelas => :environment do
+ task :sumarEscuelas => :environment do
+
+  escue = Marshal.load File.read("escuelas_nuevas_con_coord.txt")
 
 
 
-#   a = [345=>["pichi"=>4, "pachi" => 5, "pochi" => 6],346=> ["pichi"=>2, "pachi" => 10, "pochi" => 3],347=> ["pichi"=>4, "pachi" => 5, "pochi" => 6],348=> ["pichi"=>2, "pachi" => 10, "pochi" => 3]]
-# rang = [[1,[345,346],[2[347,348]]
 
-# rang.each do |ran|
-#   ranExt =*(ran[1][0]..ran[1][1])
+  votos = Marshal.load File.read('resultados_Dipu.txt')
 
-#   ranExt.each do |rangex|
-#     votos = a[rangex].values.values
-#     votos.each_with_index do |vo, inde|
-#       resEscue[inde]= resEscue[inde] + vo
+rangnum = 0
+  conter = 0
+  arrVotos = {}
+
+  votos.each do |grup|
+    grup.each do |hashi|
+      hashi.each do |mini|
+
+        #binding.pry
+        arrVotos = mini.merge(arrVotos)
+      end
+    end
+  end
+
+  #escuelasAgrupadas = arrEscuelas .each_slice(7).to_a
+
+ resEscue = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+ resTotales = []
+ arrPart = []
+
+
+
+  # a = [345=>["pichi"=>4, "pachi" => 5, "pochi" => 6],346=> ["pichi"=>2, "pachi" => 10, "pochi" => 3],347=> ["pichi"=>4, "pachi" => 5, "pochi" => 6],348=> ["pichi"=>2, "pachi" => 10, "pochi" => 3]]
+  # rang = [[1,[345,346],[2[347,348]]
+  resEscue[0] = 0
+  escue.each do |ran|
+    ranExt =*(ran[2]..ran[3])
+      ranExt.each do |rangex|
+        
+        rangnum = rangex.to_i
+
+        #binding.pry
+      arrPart = arrVotos[rangex].values
+       
+
+      arrPart.each_with_index do |vo, indoo|
+        
+
+
+            resEscue[indoo]= resEscue[indoo] + vo.to_i
+            #binding.pry
+
+      end
+      resTotales << [[ran[2], ran[3]] =>resEscue]
+      binding.pry
+
+      resEscue.deep_dup
+    end
+
+  end
+
+    binding.pry
+
+    serialized_array = Marshal.dump(arrSeccion)
+
+    File.open('escuelasYResultados.txt', 'wb') {|f| f.write(serialized_array) }
+
+end
+
+
+
+
+
+
+
+
+# task :ponerDip => :environment do
+#   School.all.each_with_index do |pol , index|
+#     if index ==0
+#       pol.name = "Diputados"
 #     end
-#     resTotales = []
-#     resTotales << [[ran[0][0], ran[0][1]] =>resEscue]
+#     pol.save!
 #   end
-
-#   serialized_array = Marshal.dump(arrSeccion)
-
-#   File.open('escuelasYResultados.txt', 'wb') {|f| f.write(serialized_array) }
-
-
 # end
 
+
+ task :sumarEscuelas2 => :environment do
+
+
+  escue = Marshal.load File.read("escuelas_nuevas_con_coord.txt")
+  escue.each_with_index do |es , ind|
+    es[7] = ind
+  end
+
+
+
+  votos = Marshal.load File.read('resultados_Dipu.txt')
+
+  rangnum = 0
+  conter = 0
+  arrVotos = {}
+
+  votos.each do |grup|
+    grup.each do |hashi|
+      hashi.each do |mini|
+
+        #binding.pry
+        arrVotos = mini.merge(arrVotos)
+      end
+    end
+  end
+  resEscue = []
+  resTotales = []
+  resVacio = []
+
+ escue.each do |ran|
+  resEscue = resVacio.dup
+  ranExt =*(ran[2]..ran[3])
+  ranExt.each do |rangex|
+      
+    rangnum = rangex.to_i
+
+      #binding.pry
+      
+      if arrVotos[rangex] == nil
+        p rangex
+        #binding.pry
+      else
+
+      
+        arrPart = arrVotos[rangex].values
+         
+        arrPart.each_with_index do |vo , ind|
+            
+            if resEscue[ind] == nil
+              resEscue[ind] = 0
+            end
+            resEscue[ind] +=  vo.to_i
+                    
+          end
+        end
+
+      end
+      
+        resTotales.push [ran, resEscue]
+        p resEscue
+    #binding.pry
+
+  end
+
+  serialized_array = Marshal.dump(resTotales)
+
+  File.open('Resultados.txt', 'wb') {|f| f.write(serialized_array) }
+  binding.pry
+
+end
+
+
+
+ task :escuelas => :environment do
+
+  resul = Marshal.load File.read('Resultados.txt')
+  r = "para ver"
+  binding.pry
+  resul.each do  |re|
+    a = School.new
+    a.id = re[0][7]
+    a.name = re[0][0]
+    
+    a.lat = re[0][5]
+    a.lon = re[0][6]
+    a.address = re[0][1]
+    #a.group = r[0][2] + "..." + re[0][3]
+#inding.pry
+p a.name
+    a.save!
+
+
+    
+
+
+  end
+end
