@@ -8,6 +8,9 @@ gem 'rails', '4.0.0.rc1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
+
+gem 'geocoder'
+
 # Use SCSS for stylesheets
 #gem 'sass-rails', '~> 4.0.0.rc1'
 
@@ -46,6 +49,8 @@ gem 'twitter-bootstrap-rails'
 gem 'simple_form'
 
 gem 'rubyvor'
+
+gem 'nokogiri'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

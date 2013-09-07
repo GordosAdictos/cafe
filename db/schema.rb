@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130807044336) do
+ActiveRecord::Schema.define(version: 20130821194020) do
 
   create_table "circus", force: true do |t|
     t.string   "name"
